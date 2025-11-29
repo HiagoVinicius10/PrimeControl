@@ -3,7 +3,6 @@
 import { api } from "@/lib/api"
 import { CustomerProps } from "@/utils/customer.type"
 import { useRouter } from "next/navigation"
-import { NextResponse } from "next/server"
 
 export function Card({customer}: {customer: CustomerProps} ){
     const router = useRouter()
@@ -11,17 +10,15 @@ export function Card({customer}: {customer: CustomerProps} ){
     async function handleDelete(){
         
         try{
-            const response = await api.delete("/api/customer",{
+             await api.delete("/api/customer",{
                 params:{
                     id: customer.id
                 }
             })
             
             router.refresh()
-
-
         }catch(err){
-            return NextResponse.json({ error: "Failed delete customer"}, { status: 400})
+            console.log(err)
         }
     }
 

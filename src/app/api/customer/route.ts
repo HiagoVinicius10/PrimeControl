@@ -47,7 +47,7 @@ export async function DELETE(request: Request) {
     })
 
     if(findTicket){
-        return NextResponse.json({ error: "Failed delete customer"}, { status: 400})
+        return NextResponse.json({ error: "Cannot delete customer with active tickets"}, { status: 400})
     }
     
     try{
@@ -60,7 +60,8 @@ export async function DELETE(request: Request) {
         return NextResponse.json({message: "User deleted with succefull"})
 
     }catch(err){
-        return NextResponse.json({ error: "Failed delete customer"}, { status: 401})
+        console.log(err)
+        return NextResponse.json({ error: "Failed delete customer"}, { status: 400})
     }
 }
 
